@@ -1,0 +1,15 @@
+version: "2.3"
+services:
+  pro_tensorflow:
+    build: 
+      context: ./
+      dockerfile: ./docker_files/pro_tensorflow/Dockerfile
+    network_mode: "host"
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - $HOME/.Xauthority:/root/.Xauthority:rw
+      - ./:/home/usr/app
+    runtime: nvidia
+    command: /sbin/init
