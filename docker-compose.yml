@@ -1,15 +1,14 @@
-version: "2.3"
 services:
-  pro_tensorflow:
-    build: 
-      context: ./
-      dockerfile: ./docker_files/pro_tensorflow/Dockerfile
-    network_mode: "host"
-    environment:
-      - DISPLAY=${DISPLAY}
+  test:
+    build: ./Dockerfiles/nvidia/
+    container_name: nvidia-container
     volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - $HOME/.Xauthority:/root/.Xauthority:rw
-      - ./:/home/usr/app
-    runtime: nvidia
-    command: /sbin/init
+      - ./:/var/www:z
+    working_dir: /var/www
+    command: /bin/bash -c "cd /var/www/app && pipenv install && /bin/bash"
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]

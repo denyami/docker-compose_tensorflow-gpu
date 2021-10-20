@@ -1,2 +1,1 @@
-<p>make entry</p>
-<p>pipenv shell</p>
+docker-compose_tensorflow-gpu

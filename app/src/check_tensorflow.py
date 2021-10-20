@@ -1,4 +1,9 @@
 import tensorflow as tf
+from tensorflow.python.client import device_lib
+#from tensorflow.python.client import device_lib
+#device_lib.list_local_devices()
+print(device_lib.list_local_devices())
+print(tf.test.is_gpu_available())
 mnist = tf.keras.datasets.mnist
  
 (x_train, y_train),(x_test, y_test) = mnist.load_data()
@@ -16,3 +21,5 @@ model.compile(optimizer='adam',
  
 model.fit(x_train, y_train, epochs=5)
 model.evaluate(x_test, y_test)
+print(tf.__version__)
+print(tf.test.is_gpu_available())
